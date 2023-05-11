@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <div class="col-lg-4 d-flex justify-content-center">
+        <div class="card align-items-center" style="width: 25rem;height: 600px;">
+            <img style="background-color: black;height: 200px;width: 350px;border-radius: 30%;margin-top: 20px;"  [src]="contact.photo" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{contact.name}}</h5>
+            </div>
+            <ul class="list-group list-group-flush text-center" style="margin-top: -400px;">
+              <li class="list-group-item" style="margin-top:-300px">Id:- {{contact.id}}</li>
+              <li class="list-group-item">Mobile:- {{contact.mobile}}</li>
+              <li class="list-group-item">Email:- {{contact.email}}</li>
+              <li class="list-group-item">Company:- {{contact.company}}</li>
+              <li class="list-group-item">Title:- {{contact.title}}</li>
+              <li class="list-group-item">Group:- {{group}}</li>
+            </ul>
+          </div>
+    </div>
+</div>

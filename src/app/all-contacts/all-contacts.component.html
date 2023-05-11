@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+    <div class="col dflex">
+      <h1>
+        All Contacts
+        <a routerLink="add-contact" class="btn btn-success ms-5 mr-5"
+          ><i class="fa-solid fa-user-plus fa-beat-fade"></i> Add new</a
+        >
+      </h1>
+      <p class="mt-4" style="text-align: justify">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto expedita
+        magni, ad in reiciendis dolore velit deleniti obcaecati ullam ex ab,
+        rerum eveniet illo nulla, voluptatibus alias enim voluptatem a
+        dignissimos eius quo facilis fugiat quos. Ducimus, placeat voluptatem
+        non corporis adipisci eos enim vel consequatur labore eligendi, possimus
+        veniam rem commodi sed iure necessitatibus facilis quod? Perferendis, in
+        temporibus. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        Doloribus pariatur nihil molestias odio libero facere accusamus error
+        fugiat minus ipsam voluptatum expedita, ullam similique aspernatur culpa
+        possimus, illo autem voluptates quasi iure non sequi quae odit? Dolor
+        cumque dicta eveniet velit ea quisquam vitae alias asperiores illum
+        natus ipsam perspiciatis quibusdam suscipit exercitationem enim
+        temporibus, vel saepe nihil, ratione sapiente ut deleniti quaerat
+        nesciunt? Harum eum doloribus, dolorem ducimus repellendus illum illo
+        similique accusantium debitis quisquam ea magnam iusto ratione aliquid,
+        dolore laboriosam architecto consequatur cum. Doloribus est nulla
+        incidunt error debitis quo aliquid, nam nesciunt consectetur ipsa esse
+        ullam.
+      </p>
+
+      <!-- Search option -->
+      <div class="row mt-4">
+        <div class="col-lg-4">
+          <h5 class="fw-bolder">Search Contacts</h5>
+        </div>
+        <div class="col-lg-6 me-auto">
+          <!-- input search box -->
+          <input  [(ngModel)]="searchKey"
+            type="text"
+            placeholder="    Type contact name .."
+            class="form-control me-auto"
+          />
+          <div *ngIf="(allContacts|filter:searchKey:'name').length===0 && !isLoading " style="width: 100%;height: 1005;display: flex;align-items: center;justify-content: center;"><img src="https://o.remove.bg/downloads/c71f09cc-4704-4f9a-ac4e-a6fbc053881b/44377254611_96d0b13955_b-removebg-preview.png " alt=""></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Loading Spinner -->
+<div class="text-center mt-5" *ngIf="isLoading && allContacts.length==0 ">
+  <div class="spinner-border text-danger" role="status">
+      <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<!-- error message div -->
+<div *ngIf="errorMsg" class="alert alert-danger m-5" role="alert">
+{{errorMsg}}
+</div>
+
+
+<!-- Contact card design -->
+<div class="container mt-5" >
+  <div class="row" *ngIf="!isLoading && allContacts.length>0  ">
+    <div class="col-lg-6 mb-3" *ngFor="let contact of allContacts|filter:searchKey:'name'">
+      <div class="card">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-sm-4 text-center">
+                <!-- image -->
+                <img [src]="contact.photo" height="100px" alt="">
+              </div>
+              <div class="col-sm-7">
+                <!-- content -->
+                <ul class="list-group">
+                    <li class="list-group-item">Name : <span class="fw-bolder">{{contact.name}}</span></li>
+                    <li class="list-group-item">Mobile : <span class="fw-bolder">{{contact.mobile}}</span></li>
+                    <li class="list-group-item">Email : <span class="fw-bolder">{{contact.email}}</span></li>
+                </ul>
+              </div>
+              <div class="col-sm-1 d-flex flex-column justify-content-center align-items-center mt-1">
+                <!-- Actions -->
+                <!-- view -->
+                <a routerLink="view-contact/{{contact.id}}" class="btn btn-warning text-light mb-1"><i class="fa-solid fa-eye"></i></a>
+                <a routerLink="edit-contact/{{contact.id}}" class="btn btn-success text-light  mb-1"><i class="fa-solid fa-pen"></i></a>
+                <button  class="btn btn-danger text-light  mb-1"><i class="fa-solid fa-trash" (click)="deleteContact(contact.id)"></i></button>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
